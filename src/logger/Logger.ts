@@ -3,6 +3,7 @@
 import chalk from 'chalk';
 import { inject, injectable } from 'inversify';
 import { EOL } from 'os';
+import { ContainerConstants } from '../constants/ContainerConstants';
 import { LogLevel } from './LogLevel';
 
 /**
@@ -45,11 +46,11 @@ export class Logger {
      * @param logLevel  The log level of this logger. Default is info.
      */
     constructor(
-        @inject(Symbol.for('Logger_output_stream'))
+        @inject(ContainerConstants.LOGGING.STREAMS.OUT)
         outputStream = process.stdout,
-        @inject(Symbol.for('Logger_error_stream'))
+        @inject(ContainerConstants.LOGGING.STREAMS.ERROR)
         errorStream = process.stderr,
-        @inject(Symbol.for('logger.loglevel'))
+        @inject(ContainerConstants.LOGGING.LOGLEVEL)
         logLevel = LogLevel.INFO,
     ) {
         this.outputStream = outputStream;

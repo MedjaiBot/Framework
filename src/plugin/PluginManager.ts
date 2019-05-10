@@ -4,6 +4,7 @@ import { existsSync, readdirSync, readFileSync } from 'fs';
 import { inject, injectable } from 'inversify';
 import { resolve } from 'path';
 import { IsNullOrUndefined } from '../../Extras';
+import { ContainerConstants } from '../constants/ContainerConstants';
 import { Logger } from '../logger/Logger';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 import { Plugin } from './Plugin';
@@ -47,7 +48,7 @@ export class PluginManager {
      * @memberof PluginManager
      */
     constructor(
-        @inject(Symbol.for('Logger'))
+        @inject(ContainerConstants.LOGGING.LOGGER)
         logger: Logger,
     ) {
         // Sets the plugin property to an empty array
