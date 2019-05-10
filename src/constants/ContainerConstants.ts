@@ -8,6 +8,8 @@ export const ContainerConstants = {
         },
     },
 
+    CONTAINER: Symbol.for('System.Container'),
+
     SYSTEMS: {
         PLUGIN: {
             PLUGINMANAGER: Symbol.for('System.Systems.Plugin.PluginManager'),
