@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "repository": "git@github.com:MedjaiBot/Framework.git",
   "author": "Yannick Fricke <yannickfricke@googlemail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "inversify": "^5.0.1"
+  }
 }
