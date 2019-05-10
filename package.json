@@ -4,7 +4,17 @@
   "repository": "git@github.com:MedjaiBot/Framework.git",
   "author": "Yannick Fricke <yannickfricke@googlemail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
   "dependencies": {
     "inversify": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2"
+  }
   }
 }
