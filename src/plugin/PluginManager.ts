@@ -3,8 +3,8 @@
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { inject, injectable } from 'inversify';
 import { resolve } from 'path';
-import { IsNullOrUndefined } from '../../Extras';
 import { ContainerConstants } from '../constants/ContainerConstants';
+import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 import { Plugin } from './Plugin';
