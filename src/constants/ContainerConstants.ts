@@ -3,8 +3,8 @@ export const ContainerConstants = {
         LOGGER: Symbol.for('System.Logging.Logger'),
         LOGLEVEL: Symbol.for('System.Loggin.Loglevel'),
         STREAMS: {
-            OUT: Symbol.for('Systen.Logging.Streams.Out'),
-            ERROR: Symbol.for('Systen.Logging.Streams.Error'),
+            OUT: Symbol.for('System.Logging.Streams.Out'),
+            ERROR: Symbol.for('System.Logging.Streams.Error'),
         },
     },
 
