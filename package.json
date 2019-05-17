@@ -12,7 +12,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
     "prerelease": "tsc",
-    "release": "semantic-release --ci=false --debug --access public --plugins @semantic-release/git"
+    "release": "semantic-release --ci=false --debug --access public --plugins @semantic-release/git @semantic-release/release-notes-generator"
   },
   "files": [
     "dist/"
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@semantic-release/git": "^7.0.8",
+    "@semantic-release/release-notes-generator": "^7.1.4",
     "@types/jest": "^24.0.12",
     "@types/node": "10",
     "commitizen": "^3.1.1",
