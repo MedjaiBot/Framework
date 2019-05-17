@@ -8,7 +8,9 @@ export const ContainerConstants = {
         },
     },
 
-    CONTAINER: Symbol.for('System.Container'),
+    DI: {
+        CONTAINER: Symbol.for('System.Container'),
+    },
 
     SYSTEMS: {
         PLUGIN: {
