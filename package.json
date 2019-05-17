@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix"
+    "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
+    "release": "semantic-release pre && npm publish --access=public && semantic-release post"
   },
   "dependencies": {
     "inversify": "^5.0.1",
