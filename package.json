@@ -7,7 +7,9 @@
   "scripts": {
     "commit": "git-cz",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix"
   },
   "dependencies": {
     "inversify": "^5.0.1",
@@ -21,6 +23,7 @@
     "jest": "^24.8.0",
     "semantic-release": "^15.13.12",
     "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "config": {
