@@ -13,7 +13,7 @@
 export abstract class Plugin {
     /**
      * The id of the plugin in the followoing format
-     * Github: "com.github.<You Username>.<Repo Name>"
+     * Github: "com.github.<Your Username>.<Repo Name>"
      *
      * @type {string}
      * @memberof Plugin
