@@ -1,21 +1,18 @@
 language: node_js
-
 node_js:
-  - 10
-
+- 10
 script:
-  - yarn test
-  - yarn lint
-
+- yarn test
+- yarn lint
 jobs:
   include:
-    # Define the release stage that runs semantic-release
-    - stage: release
-      node_js: lts/*
-      # Advanced: optionally overwrite your default `script` step to skip the tests
-      # script: skip
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script:
-          - npx semantic-release
+  - stage: release
+    node_js: lts/*
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script:
+      - npx semantic-release
+env:
+  global:
+    secure: RNtDXTPKnuUyoy73u5yINmSUd9lbP8+nB4UdoFtX6lOBQv0eILPtX9nIiZNXMcn7Kf7qk9Ivf5aW3CQku9F5eeFWhLmQKjxp8AXTuJM3tZpaMPnG9dpE2dRRgWRrXQWrZvPNWhYpuIYeeo35Mg9S11/vL4O2GFRUfLajKMn/sS02GLf4tRVoSaraQVCuZIsXnCSUoJ5U497QUu+eVXFyI/VApxEIsL/DMxAk+fMdE7YtODD7pRG/6EjytOGzDV/N6JNu7oK0185XKis9Fhb6G4/uQKW3tXaWThk9fDw27seEfEv8UbnH/Ipav9HfJ8+crFYZ+sRxacX69kmkEjCPOFBnMU8b7QUU17QrZWogOlFbRdH0d8mItk1BB0PmVwJ7EQrTXhT7yGjEakKjEbbyRMs2AR2lHfTa6ewQ504oLQxPvo9r5SGoYbHwB04OS7ewGNPuqLNwPPjVgXW2XjKhMIZ5SDiObswAHTHenC0qAaBOZiqikwpNqDlrnevvIohXoi7Q+Jzk8ZiGG7l5TCDBAkYt9x77TZEoSEipDu6s8OTpK/KLmJrbrJ9R/kYyizwDjswf/iL/H5RgbVhSPSleRQxShhs2Wj1I2ybdKrZVodDqrB1qQosfQ6SVrbbxkAULjgtGU84mzH4L0DmVBhgIJtb+fPi0+QNOeICdyA8S/pU=
