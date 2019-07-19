@@ -1,5 +1,12 @@
 # MedjaiBot Server changelog
 
+## [1.0.1](https://github.com/MedjaiBot/Framework/compare/v1.0.0...v1.0.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **PluginManager:** Fixed import for the Extras file ([cdc1b29](https://github.com/MedjaiBot/Framework/commit/cdc1b29))
+
 # 1.0.0 (2019-05-17)
 
 
