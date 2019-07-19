@@ -12,9 +12,9 @@ jobs:
       provider: script
       skip_cleanup: true
       script:
-        - cp package.json ./dist
-        - cp README.md ./dist
-        - cp CHANGELOG.md ./dist
+        - cp package.json ./dist/
+        - cp README.md ./dist/
+        - cp CHANGELOG.md ./dist/
         - yarn release
 env:
   global:
