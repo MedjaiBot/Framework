@@ -45,14 +45,6 @@ export class PluginManager {
     public eventManager: EventManager;
 
     /**
-     * The container for all plugins
-     *
-     * @type {Container}
-     * @memberof PluginManager
-     */
-    public container: Container;
-
-    /**
      * The logger which will be used
      * Mostly loaded from the dependency injection container
      *
@@ -72,8 +64,6 @@ export class PluginManager {
         logger: Logger,
         @inject(ContainerConstants.SYSTEMS.EVENT.EVENTMANAGER)
         eventManager: EventManager,
-        @inject(ContainerConstants.DI.CONTAINER)
-        container: Container,
     ) {
         // Sets the plugin property to an empty array
         this.plugins = [];
@@ -83,9 +73,6 @@ export class PluginManager {
 
         // Sets the eventManager property to the given event manager
         this.eventManager = eventManager;
-
-        // Sets the container property to the given event manager
-        this.container = container;
     }
 
     /**
