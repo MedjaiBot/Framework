@@ -63,7 +63,7 @@ export class Logger {
      *
      * @param message The message to log
      */
-    public info(message: string) {
+    public info(message: string): void {
         this.log(
             this.outputStream,
             LogLevel.INFO,
@@ -75,7 +75,7 @@ export class Logger {
      * Logs the given message with the DEBUG level
      * @param message The message to log
      */
-    public debug(message: string) {
+    public debug(message: string): void {
         this.log(
             this.outputStream,
             LogLevel.DEBUG,
@@ -90,7 +90,7 @@ export class Logger {
      * @param {string} error The error to log
      * @memberof Logger
      */
-    public warn(message: string) {
+    public warn(message: string): void {
         this.log(
             this.outputStream,
             LogLevel.WARN,
@@ -105,7 +105,7 @@ export class Logger {
      * @param {string} error The error to log
      * @memberof Logger
      */
-    public error(message: string, error?: string) {
+    public error(message: string, error?: string): void {
         this.log(
             this.errorStream,
             LogLevel.ERROR,
@@ -118,7 +118,7 @@ export class Logger {
      * @param description The description for the object
      * @param obj The object to log
      */
-    public dumpObject(description: string, obj: object) {
+    public dumpObject(description: string, obj: object): void {
         this.log(
             this.outputStream,
             LogLevel.DUMP,
@@ -134,7 +134,7 @@ export class Logger {
      * @returns The formatted number
      * @memberof Logger
      */
-    public formatNumber(number: number, prefix: string = '0', length: number = 2) {
+    public formatNumber(number: number, prefix: string = '0', length: number = 2): string {
         const stringLength = number.toString().length;
 
         if (stringLength === length) {
@@ -157,7 +157,7 @@ export class Logger {
      * @param {string} message The message to log
      * @memberof Logger
      */
-    private log(stream: NodeJS.WriteStream, level: number, message: string) {
+    private log(stream: NodeJS.WriteStream, level: number, message: string): void {
         // The log level as a (colored) string
         let logLevel;
 
