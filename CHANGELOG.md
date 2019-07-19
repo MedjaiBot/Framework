@@ -1,5 +1,15 @@
 # MedjaiBot Server changelog
 
+## [1.1.2](https://github.com/MedjaiBot/Framework/compare/v1.1.1...v1.1.2) (2019-07-19)
+
+
+### Bug Fixes
+
+* **TravisCI:** Fixed copy before deploy ([0fbc80e](https://github.com/MedjaiBot/Framework/commit/0fbc80e))
+* **TravisCI:** Fixed deployment step ([8701282](https://github.com/MedjaiBot/Framework/commit/8701282))
+* **TravisCI:** Fixed TravisCI config ([ddd858e](https://github.com/MedjaiBot/Framework/commit/ddd858e))
+* **TravisCI:** Hopefully fixed the release of the NPM package ([a76cf8e](https://github.com/MedjaiBot/Framework/commit/a76cf8e))
+
 ## [1.1.1](https://github.com/MedjaiBot/Framework/compare/v1.1.0...v1.1.1) (2019-07-19)
 
 
