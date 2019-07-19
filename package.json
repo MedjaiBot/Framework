@@ -1,6 +1,6 @@
 {
   "name": "@medjaibot/framework",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": "git@github.com:MedjaiBot/Framework.git",
   "author": "Yannick Fricke <yannickfricke@googlemail.com>",
   "private": false,
