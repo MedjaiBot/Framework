@@ -1,5 +1,12 @@
 # MedjaiBot Server changelog
 
+# [1.1.0](https://github.com/MedjaiBot/Framework/compare/v1.0.1...v1.1.0) (2019-07-19)
+
+
+### Features
+
+* **TypeScript:** Generate declaration files ([ff5ff42](https://github.com/MedjaiBot/Framework/commit/ff5ff42))
+
 ## [1.0.1](https://github.com/MedjaiBot/Framework/compare/v1.0.0...v1.0.1) (2019-07-19)
 
 
