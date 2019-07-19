@@ -54,7 +54,7 @@ describe('EventManager', () => {
             await sleep(2000);
         });
 
-        const callDuration = await eventManager.measureEventByName(
+        await eventManager.measureEventByName(
             eventName,
             callArgument,
         );
