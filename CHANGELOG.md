@@ -1,5 +1,12 @@
 # MedjaiBot Server changelog
 
+## [1.1.1](https://github.com/MedjaiBot/Framework/compare/v1.1.0...v1.1.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **Release:** Fixed release step on TravisCi ([ea7eef7](https://github.com/MedjaiBot/Framework/commit/ea7eef7))
+
 # [1.1.0](https://github.com/MedjaiBot/Framework/compare/v1.0.1...v1.1.0) (2019-07-19)
 
 
