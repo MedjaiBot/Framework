@@ -33,6 +33,23 @@ export class PluginManager {
     public plugins: Plugin[];
 
     /**
+     * The event manager which will be used
+     *
+     * @private
+     * @type {EventManager}
+     * @memberof PluginManager
+     */
+    public eventManager: EventManager;
+
+    /**
+     * The container for all plugins
+     *
+     * @type {Container}
+     * @memberof PluginManager
+     */
+    public container: Container;
+
+    /**
      * The logger which will be used
      * Mostly loaded from the dependency injection container
      *
