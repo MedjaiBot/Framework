@@ -1,13 +1,16 @@
 // tslint:disable:forin
 
 import { existsSync, readdirSync, readFileSync } from 'fs';
-import { inject, injectable } from 'inversify';
+import { Container, inject, injectable } from 'inversify';
 import { resolve } from 'path';
 import { ContainerConstants } from '../constants/ContainerConstants';
+import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 import { Plugin } from './Plugin';
+
+declare var __non_webpack_require__: any;
 
 /**
  * The plugin manager manages plugins
@@ -67,12 +70,22 @@ export class PluginManager {
     constructor(
         @inject(ContainerConstants.LOGGING.LOGGER)
         logger: Logger,
+        @inject(ContainerConstants.SYSTEMS.EVENT.EVENTMANAGER)
+        eventManager: EventManager,
+        @inject(ContainerConstants.DI.CONTAINER)
+        container: Container,
     ) {
         // Sets the plugin property to an empty array
         this.plugins = [];
 
         // Sets the logger property to the given logger
         this.logger = logger;
+
+        // Sets the eventManager property to the given event manager
+        this.eventManager = eventManager;
+
+        // Sets the container property to the given event manager
+        this.container = container;
     }
 
     /**
@@ -82,6 +95,8 @@ export class PluginManager {
      * @memberof PluginManager
      */
     public loadPlugins = (directory: string) => {
+        this.eventManager.broadcast('System.Systems.Plugin.PluginManager.LoadPlugins');
+
         // Checks if the given directory exists on the filesystem
         if (!existsSync(directory)) {
             throw new Error(`Directory ${directory} does not exists`);
@@ -122,7 +137,7 @@ export class PluginManager {
             const parsedPluginFile: IPluginDescriptorFile = JSON.parse(pluginFileContents);
 
             // The main key of the parsed plugin file
-            const mainEntry = parsedPluginFile.main;
+            const mainEntry = parsedPluginFile.main as string;
 
             // Checks if the main entry is null or undefined
             if (IsNullOrUndefined(mainEntry)) {
@@ -132,7 +147,7 @@ export class PluginManager {
             }
 
             // Check if the main entry wants try to include a file outside of the plugin directory
-            if ((mainEntry as string).includes('..')) {
+            if (mainEntry.includes('..')) {
                 this.logger.debug('The main entry must be located inside in the plugin directory');
             }
 
@@ -141,11 +156,11 @@ export class PluginManager {
 
             try {
                 // Requires the file which is defined in the "main" key
-                plugin = require(
+                plugin = __non_webpack_require__(
                     resolve(
                         directory,
                         pluginDirectory,
-                        mainEntry as string,
+                        mainEntry,
                     ));
             } catch (error) {
                 this.logger.error(`Could not require plugin ${pluginDirectory}`, error);
