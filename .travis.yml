@@ -8,6 +8,7 @@ script:
   - yarn lint
 
 before_deploy:
+  - yarn tsc
   - cp package.json ./dist/
   - cp README.md ./dist/
   - cp CHANGELOG.md ./dist/
@@ -15,12 +16,12 @@ before_deploy:
 jobs:
   include:
   - stage: release
-    node_js: lts/*
+    node_js: 10
     deploy:
       provider: script
       skip_cleanup: true
       script:
-        - yarn release
+        - npx semantic-release
 
 env:
   global:
