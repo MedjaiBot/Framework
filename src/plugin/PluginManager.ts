@@ -1,12 +1,14 @@
 // tslint:disable:forin
 
-import { existsSync, readdirSync, readFileSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { Container, inject, injectable } from 'inversify';
 import { resolve } from 'path';
 import { ContainerConstants } from '../constants/ContainerConstants';
 import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
+import { InitializationContext } from './InitializationContext';
+import { InitializationSide } from './InitializationSide';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 import { Plugin } from './Plugin';
 
@@ -55,6 +57,15 @@ export class PluginManager {
     private logger: Logger;
 
     /**
+     * The container from the application
+     *
+     * @private
+     * @type {Container}
+     * @memberof PluginManager
+     */
+    private container!: Container | undefined;
+
+    /**
      * Creates an instance of PluginManager.
      * @param {Logger} logger The logger which should be used from the dependency injection container
      * @memberof PluginManager
@@ -62,6 +73,7 @@ export class PluginManager {
     constructor(
         @inject(ContainerConstants.LOGGING.LOGGER)
         logger: Logger,
+
         @inject(ContainerConstants.SYSTEMS.EVENT.EVENTMANAGER)
         eventManager: EventManager,
     ) {
@@ -73,6 +85,19 @@ export class PluginManager {
 
         // Sets the eventManager property to the given event manager
         this.eventManager = eventManager;
+
+        // Set the container to "undefined" for the client
+        this.container = undefined;
+    }
+
+    /**
+     * Sets the container
+     *
+     * @param {Container} container
+     * @memberof PluginManager
+     */
+    public setContainer(container: Container) {
+        this.container = container;
     }
 
     /**
@@ -96,6 +121,15 @@ export class PluginManager {
         for (const index in pluginDirectories) {
             // Gets the current entry from the contents
             const pluginDirectory = pluginDirectories[index];
+
+            const fileStats = statSync(pluginDirectory);
+
+            // Check if the current entry is a directory
+            if (!fileStats.isDirectory()) {
+
+                // Current entry is not a directory so we skip it
+                continue;
+            }
 
             // Resolves the given parts into a path as string
             const pluginJsonFile = resolve(directory, pluginDirectory, 'plugin.json');
@@ -164,9 +198,15 @@ export class PluginManager {
             // The plugin instance
             const pluginInstance: Plugin = new plugin.default();
 
+            // The context for initializing the plugin
+            const initializationContext: InitializationContext = {
+                initializationSide: InitializationSide.SERVER,
+                container: this.container,
+            };
+
             try {
                 // Trying to call the onInit function of the plugin
-                pluginInstance.onInit();
+                pluginInstance.onInit(initializationContext);
             } catch (error) {
                 this.logger.error(`Could not call onInit for plugin "${pluginDirectory}"`, error);
 
