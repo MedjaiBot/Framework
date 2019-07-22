@@ -1,13 +1,16 @@
 # MedjaiBot Framework
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+![Discord Server](https://img.shields.io/discord/314533595987574794.svg?label=Discord&style=flat-square)
 
 ## What is the use of this framework
 
 This framework will be used in the client and server version of the MedjaiBot.
 
-## Which technologies will be used
+Also plugins will need to require it in order to have access to all classes.
 
-We use TypeScript for defining the types of the applications.
+## Which technologies are used
+
+We only use TypeScript in order to have type safety for all depending scripts.
 
 ## Contributors
 
