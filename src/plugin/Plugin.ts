@@ -1,3 +1,5 @@
+import { InitializationContext } from './InitializationContext';
+
 /**
  * A basic plugin definition
  *
@@ -70,7 +72,10 @@ export abstract class Plugin {
      * Use this to do the initial work
      *
      * @abstract
+     * @param context The initialization context
      * @memberof Plugin
      */
-    public abstract onInit(): void;
+    public abstract onInit(
+        context: InitializationContext,
+    ): void;
 }
