@@ -1,6 +1,7 @@
 # MedjaiBot Framework
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
-![Discord Server](https://img.shields.io/discord/314533595987574794.svg?label=Discord&style=flat-square)
+[![Discord Server](https://img.shields.io/discord/314533595987574794.svg?label=Discord&style=flat-square)](https://discordapp.com/invite/sfnPrRx)
 
 ## What is the use of this framework
 
