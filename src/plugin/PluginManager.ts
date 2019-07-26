@@ -63,7 +63,7 @@ export class PluginManager {
      * @type {Container}
      * @memberof PluginManager
      */
-    private container!: Container | undefined;
+    private container: Container;
 
     /**
      * Creates an instance of PluginManager.
@@ -76,6 +76,9 @@ export class PluginManager {
 
         @inject(ContainerConstants.SYSTEMS.EVENT.EVENTMANAGER)
         eventManager: EventManager,
+
+        @inject(ContainerConstants.DI.CONTAINER)
+        container: Container,
     ) {
         // Sets the plugin property to an empty array
         this.plugins = [];
@@ -86,17 +89,7 @@ export class PluginManager {
         // Sets the eventManager property to the given event manager
         this.eventManager = eventManager;
 
-        // Set the container to "undefined" for the client
-        this.container = undefined;
-    }
-
-    /**
-     * Sets the container
-     *
-     * @param {Container} container
-     * @memberof PluginManager
-     */
-    public setContainer(container: Container) {
+        // Set the container
         this.container = container;
     }
 
@@ -206,9 +199,13 @@ export class PluginManager {
             // The plugin instance
             const pluginInstance: Plugin = new plugin.default();
 
+            // Get the initialization side from the container
+            const initializationSide = this.container.get<InitializationSide>(
+                ContainerConstants.SYSTEMS.PLUGIN.INITIALIZATIONSIDE,
+            );
             // The context for initializing the plugin
             const initializationContext: IInitializationContext = {
-                initializationSide: InitializationSide.SERVER,
+                initializationSide,
                 container: this.container,
             };
 
