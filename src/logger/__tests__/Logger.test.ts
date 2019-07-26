@@ -67,4 +67,43 @@ describe('Logger', () => {
             expect(outputStreamMock.write).toBeCalled();
         });
     });
+
+    describe('Formatting numbers', () => {
+        const outputStreamMock: any = jest.fn();
+        const errorStreamMock: any = jest.fn();
+
+        const logger = new Logger(
+            outputStreamMock,
+            errorStreamMock,
+            LogLevel.DEBUG,
+        );
+
+        it('should format a number to two characters when only one was provided', () => {
+            const result = logger.formatNumber(0);
+
+            expect(result).toHaveLength(2);
+            expect(result).toBe('00');
+        });
+
+        it('should not format a number with two characters', () => {
+            const result = logger.formatNumber(10);
+
+            expect(result).toHaveLength(2);
+            expect(result).toBe('10');
+        });
+
+        it('should cut all numbers after the given length', () => {
+            const result = logger.formatNumber(100);
+
+            expect(result).toHaveLength(2);
+            expect(result).toBe('10');
+        });
+
+        it('should pad the number with the given prefix', () => {
+            const result = logger.formatNumber(1, 'O');
+
+            expect(result).toHaveLength(2);
+            expect(result).toBe('O1');
+        });
+    });
 });
