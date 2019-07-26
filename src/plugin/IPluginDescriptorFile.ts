@@ -17,5 +17,5 @@ export interface IPluginDescriptorFile {
      * @type {string}
      * @memberof IPluginDescriptorFile
      */
-    main?: string;
+    main: string;
 }
