@@ -157,19 +157,23 @@ export class PluginManager {
             // Parses the the contents of plugin.json file as JSON
             const parsedPluginFile: IPluginDescriptorFile = JSON.parse(pluginFileContents);
 
-            // The main key of the parsed plugin file
-            const mainEntry = parsedPluginFile.main as string;
+            // The main entry file of the parsed plugin file
+            const mainEntry = parsedPluginFile.main;
 
             // Checks if the main entry is null or undefined
             if (IsNullOrUndefined(mainEntry)) {
-                this.logger.debug('The parsed config key "main" is undefined');
+                this.logger.debug(
+                    `The parsed config key "main" for the plugin ${pluginDirectory} is undefined`,
+                );
 
                 continue;
             }
 
             // Check if the main entry wants try to include a file outside of the plugin directory
             if (mainEntry.includes('..')) {
-                this.logger.debug('The main entry must be located inside in the plugin directory');
+                this.logger.debug(
+                    'The main entry must be located inside in the plugin directory',
+                );
             }
 
             // The plugin structure of the file
