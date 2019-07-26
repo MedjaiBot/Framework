@@ -1,4 +1,4 @@
-# MedjaiBot Server changelog
+# MedjaiBot Framework changelog
 
 ## [1.1.2](https://github.com/MedjaiBot/Framework/compare/v1.1.1...v1.1.2) (2019-07-19)
 

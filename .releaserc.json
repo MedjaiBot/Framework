@@ -13,7 +13,7 @@
       "@semantic-release/changelog",
       {
         "changelogFile": "CHANGELOG.md",
-        "changelogTitle": "# MedjaiBot Server changelog"
+        "changelogTitle": "# MedjaiBot Framework changelog"
       }
     ],
     [
