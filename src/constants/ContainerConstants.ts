@@ -15,6 +15,7 @@ export const ContainerConstants = {
     SYSTEMS: {
         PLUGIN: {
             PLUGINMANAGER: Symbol.for('System.Systems.Plugin.PluginManager'),
+            INITIALIZATIONSIDE: Symbol.for('System.Systems.Plugin.InitializationSide'),
         },
 
         EVENT: {
