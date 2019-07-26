@@ -48,8 +48,10 @@ export class Logger {
     constructor(
         @inject(ContainerConstants.LOGGING.STREAMS.OUT)
         outputStream = process.stdout,
+
         @inject(ContainerConstants.LOGGING.STREAMS.ERROR)
         errorStream = process.stderr,
+
         @inject(ContainerConstants.LOGGING.LOGLEVEL)
         logLevel = LogLevel.INFO,
     ) {
