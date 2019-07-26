@@ -159,43 +159,77 @@ export class Logger {
      */
     private log(stream: NodeJS.WriteStream, level: number, message: string): void {
         // The log level as a (colored) string
-        let logLevel;
-
-        if ((this.logLevel & LogLevel.INFO) === level) {
-            logLevel = chalk.supportsColor ? chalk.blue('INFO') : 'INFO';
-        }
-        if ((this.logLevel & LogLevel.DEBUG) === level) {
-            logLevel = chalk.supportsColor ? chalk.cyanBright('DEBUG') : 'DEBUG';
-        }
-        if ((this.logLevel & LogLevel.WARN) === level) {
-            logLevel = chalk.supportsColor ? chalk.yellow('WARN') : 'WARN';
-        }
-        if ((this.logLevel & LogLevel.ERROR) === level) {
-            logLevel = chalk.supportsColor ? chalk.redBright('ERROR') : 'ERROR';
-        }
-        if ((this.logLevel & LogLevel.DUMP) === level) {
-            logLevel = chalk.supportsColor ? chalk.cyanBright('DUMP') : 'DUMP';
-        }
-
-        // Sets the timestamp variable to the current time and date
+        const logLevel = this.getLogLevel(level);
         const timestamp = new Date();
+        const formattedDate = this.getFormattedDate(timestamp);
+        const formattedTime = this.getFormattedTime(timestamp);
 
-        // The formatted date joined by a point
-        const formattedDate = [
+        // Writes the log messages to the given stream
+        stream.write(`[${formattedDate} ${formattedTime}] [${logLevel}] ${message}${EOL}`);
+    }
+
+    /**
+     * Returns the loglevel as (colored) string
+     *
+     * @private
+     * @param {number} level The level which was passed to the log function
+     * @returns {string} The (colored) loglevel
+     * @memberof Logger
+     */
+    private getLogLevel(level: number): string {
+        if ((this.logLevel & LogLevel.INFO) === level) {
+            return chalk.supportsColor ? chalk.blue('INFO') : 'INFO';
+        }
+
+        if ((this.logLevel & LogLevel.DEBUG) === level) {
+            return chalk.supportsColor ? chalk.cyanBright('DEBUG') : 'DEBUG';
+        }
+
+        if ((this.logLevel & LogLevel.WARN) === level) {
+            return chalk.supportsColor ? chalk.yellow('WARN') : 'WARN';
+        }
+
+        if ((this.logLevel & LogLevel.ERROR) === level) {
+            return chalk.supportsColor ? chalk.redBright('ERROR') : 'ERROR';
+        }
+
+        if ((this.logLevel & LogLevel.DUMP) === level) {
+            return chalk.supportsColor ? chalk.cyanBright('DUMP') : 'DUMP';
+        }
+
+        return 'UNKNOWN';
+    }
+
+    /**
+     * Returns the formatted date
+     *
+     * @private
+     * @param {Date} timestamp The timestamp which will be used to determine the date
+     * @returns {string} The formatted date for the log
+     * @memberof Logger
+     */
+    private getFormattedDate(timestamp: Date): string {
+        return [
             this.formatNumber(timestamp.getDate()),
             this.formatNumber(timestamp.getMonth() + 1),
             timestamp.getFullYear(),
         ].join('.');
+    }
 
-        // The formatted time joined by a semicolon
-        const formattedTime = [
+    /**
+     * Returns the formatted time
+     *
+     * @private
+     * @param {Date} timestamp The timestamp which will be used to determine the time
+     * @returns {string} The formatted time for the log
+     * @memberof Logger
+     */
+    private getFormattedTime(timestamp: Date): string {
+        return [
             this.formatNumber(timestamp.getHours()),
             this.formatNumber(timestamp.getMinutes()),
             this.formatNumber(timestamp.getSeconds()),
             this.formatNumber(timestamp.getMilliseconds(), '0', 3),
         ].join(':');
-
-        // Writes the log messages to the given stream
-        stream.write(`[${formattedDate} ${formattedTime}] [${logLevel}] ${message}${EOL}`);
     }
 }
