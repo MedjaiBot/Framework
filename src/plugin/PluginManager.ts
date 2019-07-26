@@ -121,8 +121,12 @@ export class PluginManager {
         for (const index in pluginDirectories) {
             // Gets the current entry from the contents
             const pluginDirectory = pluginDirectories[index];
+            const pluginPath = resolve(
+                directory,
+                pluginDirectory,
+            );
 
-            const fileStats = statSync(pluginDirectory);
+            const fileStats = statSync(pluginPath);
 
             // Check if the current entry is a directory
             if (!fileStats.isDirectory()) {
@@ -132,7 +136,7 @@ export class PluginManager {
             }
 
             // Resolves the given parts into a path as string
-            const pluginJsonFile = resolve(directory, pluginDirectory, 'plugin.json');
+            const pluginJsonFile = resolve(pluginPath, 'plugin.json');
 
             // Checks if the plugin.json file exists
             if (!existsSync(pluginJsonFile)) {
