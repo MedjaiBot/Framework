@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.2.1](https://github.com/MedjaiBot/Framework/compare/v1.2.0...v1.2.1) (2019-07-26)
+
+
+### Bug Fixes
+
+* **pluginmanager:** fixed the file stats call ([09d71d9](https://github.com/MedjaiBot/Framework/commit/09d71d9))
+
 # [1.2.0](https://github.com/MedjaiBot/Framework/compare/v1.1.2...v1.2.0) (2019-07-26)
 
 
