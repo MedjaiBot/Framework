@@ -4,6 +4,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { Container, inject, injectable } from 'inversify';
 import { resolve } from 'path';
 import { ContainerConstants } from '../constants/ContainerConstants';
+import { EventsConstants } from '../constants/EventConstants';
 import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
@@ -100,7 +101,7 @@ export class PluginManager {
      * @memberof PluginManager
      */
     public loadPlugins = (directory: string) => {
-        this.eventManager.broadcast('System.Systems.Plugin.PluginManager.LoadPlugins');
+        this.eventManager.broadcast(EventsConstants.Plugin.LoadPlugins);
 
         // Checks if the given directory exists on the filesystem
         if (!existsSync(directory)) {
