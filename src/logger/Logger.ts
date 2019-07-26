@@ -136,18 +136,23 @@ export class Logger {
      * @returns The formatted number
      * @memberof Logger
      */
-    public formatNumber(number: number, prefix: string = '0', length: number = 2): string {
-        const stringLength = number.toString().length;
+    public formatNumber(
+        number: number,
+        prefix: string = '0',
+        length: number = 2,
+    ): string {
+        const stringifiedNumber = number.toString();
+        const stringLength = stringifiedNumber.length;
 
         if (stringLength === length) {
-            return number.toString();
+            return stringifiedNumber;
         }
 
         if (stringLength > length) {
-            return number.toString().substr(0, length);
+            return stringifiedNumber.substr(0, length);
         }
 
-        return number.toString().padStart(length, prefix);
+        return stringifiedNumber.padStart(length, prefix);
     }
 
     /**
