@@ -1,4 +1,4 @@
-import { InitializationContext } from './InitializationContext';
+import { IInitializationContext } from './IInitializationContext';
 
 /**
  * A basic plugin definition
@@ -76,6 +76,6 @@ export abstract class Plugin {
      * @memberof Plugin
      */
     public abstract onInit(
-        context: InitializationContext,
+        context: IInitializationContext,
     ): void;
 }

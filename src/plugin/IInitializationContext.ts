@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 import { InitializationSide } from './InitializationSide';
 
-export interface InitializationContext {
+export interface IInitializationContext {
     /**
      * Defines the side where the plugin is initialized
      *

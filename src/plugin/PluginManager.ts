@@ -7,7 +7,7 @@ import { ContainerConstants } from '../constants/ContainerConstants';
 import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
-import { InitializationContext } from './InitializationContext';
+import { IInitializationContext } from './IInitializationContext';
 import { InitializationSide } from './InitializationSide';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 import { Plugin } from './Plugin';
@@ -199,7 +199,7 @@ export class PluginManager {
             const pluginInstance: Plugin = new plugin.default();
 
             // The context for initializing the plugin
-            const initializationContext: InitializationContext = {
+            const initializationContext: IInitializationContext = {
                 initializationSide: InitializationSide.SERVER,
                 container: this.container,
             };
