@@ -1,5 +1,5 @@
 /**
- * The context for a plugin when it will be initialized
+ * Defines on which side the plugin will be initialized
  *
  * @export
  * @enum {number}
@@ -11,7 +11,7 @@ export enum InitializationSide {
     CLIENT,
 
     /**
-     * Defines that the plugin is loaded from the client
+     * Defines that the plugin is loaded from the server
      */
     SERVER,
 }
