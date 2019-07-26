@@ -16,5 +16,5 @@ export interface IInitializationContext {
      * @type {Container}
      * @memberof InitializationContext
      */
-    container?: Container;
+    container: Container;
 }
