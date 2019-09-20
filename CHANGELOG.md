@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.3.1](https://github.com/MedjaiBot/Framework/compare/v1.3.0...v1.3.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **ttylogger:** fixed the className check ([a9c161e](https://github.com/MedjaiBot/Framework/commit/a9c161e))
+
 # [1.3.0](https://github.com/MedjaiBot/Framework/compare/v1.2.1...v1.3.0) (2019-07-26)
 
 
