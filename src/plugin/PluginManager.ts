@@ -197,8 +197,13 @@ export class PluginManager {
                 continue;
             }
 
+            const tempServiceIdentifier = 'tempPlugin';
+            this.container.bind(tempServiceIdentifier).to(plugin.default());
+
             // The plugin instance
-            const pluginInstance: Plugin = new plugin.default();
+            const pluginInstance: Plugin = this.container.get<Plugin>(tempServiceIdentifier);
+
+            this.container.unbind(tempServiceIdentifier);
 
             // Get the initialization side from the container
             const initializationSide = this.container.get<InitializationSide>(
