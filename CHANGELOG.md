@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+# [1.3.0](https://github.com/MedjaiBot/Framework/compare/v1.2.1...v1.3.0) (2019-07-26)
+
+
+### Features
+
+* **containerconstants:** added the initializationside constant ([07c96bc](https://github.com/MedjaiBot/Framework/commit/07c96bc))
+
 ## [1.2.1](https://github.com/MedjaiBot/Framework/compare/v1.2.0...v1.2.1) (2019-07-26)
 
 
