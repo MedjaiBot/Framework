@@ -1,3 +1,4 @@
+import { injectable } from 'inversify';
 import { IInitializationContext } from './IInitializationContext';
 
 /**
@@ -12,6 +13,7 @@ import { IInitializationContext } from './IInitializationContext';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/server
  */
+@injectable()
 export abstract class Plugin {
     /**
      * The id of the plugin in the followoing format
