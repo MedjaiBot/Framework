@@ -18,7 +18,7 @@ export abstract class Logger {
      * @type {string}
      * @memberof Logger
      */
-    public className!: string;
+    public className?: string;
 
     /**
      * Logs a message with the debug log level
