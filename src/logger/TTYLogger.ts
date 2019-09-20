@@ -1,6 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { EOL } from 'os';
 import { ContainerConstants } from '../constants/ContainerConstants';
+import { IsNullOrUndefined } from '../Extras';
 import { Formatter } from './formatter/Formatter';
 import { IFormatOptions } from './IFormatOptions';
 import { Logger } from './Logger';
@@ -200,11 +201,17 @@ export class TTYLogger extends Logger {
         );
         const formattedLogLevel = this.logLevelFormatter.format(options.level);
 
-        const prefix = [
+        const prefixParts = [
             formattedDateTime,
-            this.className,
-            formattedLogLevel,
-        ].map((entry: string) => {
+        ];
+
+        if (!IsNullOrUndefined(this.className)) {
+            prefixParts.push(this.className as string);
+        }
+
+        prefixParts.push(formattedLogLevel);
+
+        const prefix = prefixParts.map((entry: string) => {
             return `[${entry}]`;
         }).join(' ');
 
