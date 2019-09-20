@@ -1,5 +1,9 @@
 export const ContainerConstants = {
     LOGGING: {
+        FORMATTER: {
+            DATETIME: Symbol.for('System.Logging.Formatter.DateTime'),
+            LOGLEVEL: Symbol.for('System.Logging.Formatter.LogLevel'),
+        },
         LOGGER: Symbol.for('System.Logging.Logger'),
         LOGLEVEL: Symbol.for('System.Loggin.Loglevel'),
         STREAMS: {

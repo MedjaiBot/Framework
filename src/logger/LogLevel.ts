@@ -3,40 +3,16 @@
  *
  * @export
  * @enum {number}
- * @since 0.0.1
- * @version 0.0.1
  * @author Yannick Fricke <yannickfricke@googlemail.com>
  * @license MIT
- * @copyright MedjaiBot https://github.com/MedjaiBot/server
+ * @copyright MedjaiBot https://github.com/MedjaiBot/Server
  */
 export enum LogLevel {
-    /**
-     * The info log level
-     */
-    INFO = 1 << 0,
+    ERROR = 1 << 0,
 
-    /**
-     * The debug log level. Will be checked with the dump log level
-     */
-    DEBUG = 1 << 1,
+    WARN = 1 << 1 | ERROR,
 
-    /**
-     * The warn log level
-     */
-    WARN = 1 << 2,
+    INFO = 1 << 2 | WARN,
 
-    /**
-     * The error log level
-     */
-    ERROR = 1 << 3,
-
-    /**
-     * The dump log level. Will be checked with the debug log level
-     */
-    DUMP = 1 << 4,
-
-    /**
-     * All loglevels togeather
-     */
-    ALL = INFO | DEBUG | WARN | ERROR | DUMP,
+    DEBUG = 1 << 3 | INFO,
 }
