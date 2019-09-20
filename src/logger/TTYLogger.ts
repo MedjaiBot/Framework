@@ -149,7 +149,11 @@ export class TTYLogger extends Logger {
             return;
         }
 
-        this.log(this.errorStream, LogLevel.ERROR, message);
+        this.log(
+            this.errorStream,
+            LogLevel.ERROR,
+            error === undefined ? message : `${message} ${error}`,
+        );
     }
 
     /**
