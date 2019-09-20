@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.3.2](https://github.com/MedjaiBot/Framework/compare/v1.3.1...v1.3.2) (2019-09-20)
+
+
+### Bug Fixes
+
+* **ttylogger:** fixed the error method ([c8eb85f](https://github.com/MedjaiBot/Framework/commit/c8eb85f))
+
 ## [1.3.1](https://github.com/MedjaiBot/Framework/compare/v1.3.0...v1.3.1) (2019-09-20)
 
 
