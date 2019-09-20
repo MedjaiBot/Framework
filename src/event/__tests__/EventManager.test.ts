@@ -54,11 +54,10 @@ describe('EventManager', () => {
             await sleep(2000);
         });
 
-        await eventManager.measureEventByName(
+        expect(eventManager.measureEventByName(
             eventName,
             callArgument,
-        );
-
+        )).resolves.not.toThrowError();
         expect(subscriber).toHaveBeenCalled();
     });
 
