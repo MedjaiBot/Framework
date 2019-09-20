@@ -20,7 +20,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public id: string;
+    public readonly id: string;
 
     /**
      * The name of the plugin
@@ -28,7 +28,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public name: string;
+    public readonly name: string;
 
     /**
      * The version of the plugin
@@ -36,7 +36,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public version: string;
+    public readonly version: string;
 
     /**
      * The author(s) of the plugin
@@ -44,7 +44,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public author: string;
+    public readonly author: string;
 
     /**
      * Creates an instance of Plugin.
