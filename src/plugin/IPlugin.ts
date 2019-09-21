@@ -1,4 +1,3 @@
-import { injectable } from 'inversify';
 import { IInitializationContext } from './IInitializationContext';
 
 /**
@@ -13,8 +12,7 @@ import { IInitializationContext } from './IInitializationContext';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/server
  */
-@injectable()
-export abstract class Plugin {
+export interface IPlugin {
     /**
      * The id of the plugin in the followoing format
      * Github: "com.github.<Your Username>.<Repo Name>"
@@ -22,7 +20,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public readonly id: string;
+    id: string;
 
     /**
      * The name of the plugin
@@ -30,7 +28,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public readonly name: string;
+    name: string;
 
     /**
      * The version of the plugin
@@ -38,7 +36,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public readonly version: string;
+    version: string;
 
     /**
      * The author(s) of the plugin
@@ -46,27 +44,7 @@ export abstract class Plugin {
      * @type {string}
      * @memberof Plugin
      */
-    public readonly author: string;
-
-    /**
-     * Creates an instance of Plugin.
-     * @param {string} id The id iof the plugin
-     * @param {string} name The name of the plugin
-     * @param {string} version The version of the plugin
-     * @param {string} author The author(s) of the plugin
-     * @memberof Plugin
-     */
-    constructor(
-        id: string,
-        name: string,
-        version: string,
-        author: string,
-    ) {
-        this.id = id;
-        this.name = name;
-        this.version = version;
-        this.author = author;
-    }
+    author: string;
 
     /**
      * Lifecycle hook
@@ -77,7 +55,5 @@ export abstract class Plugin {
      * @param context The initialization context
      * @memberof Plugin
      */
-    public abstract onInit(
-        context: IInitializationContext,
-    ): void;
+    onInit: (context: IInitializationContext) => void;
 }
