@@ -120,7 +120,6 @@ export class PluginManager {
 
             // Check if the current entry is a directory
             if (!fileStats.isDirectory()) {
-
                 // Current entry is not a directory so we skip it
                 continue;
             }
