@@ -195,11 +195,11 @@ export class PluginManager {
                 continue;
             }
 
-            const tempServiceIdentifier = 'tempPlugin';
-            this.container.bind(tempServiceIdentifier).to(plugin.default());
+            const tempServiceIdentifier = parsedPluginFile.id;
+            this.container.bind(tempServiceIdentifier).to(plugin.default);
 
             // The plugin instance
-            const pluginInstance: Plugin = this.container.get<Plugin>(tempServiceIdentifier);
+            const pluginInstance: IPlugin = this.container.get<IPlugin>(tempServiceIdentifier);
 
             this.container.unbind(tempServiceIdentifier);
 
