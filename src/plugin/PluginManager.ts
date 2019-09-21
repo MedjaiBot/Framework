@@ -8,8 +8,6 @@ import { EventsConstants } from '../constants/EventConstants';
 import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
-import { IInitializationContext } from './IInitializationContext';
-import { InitializationSide } from './InitializationSide';
 import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 
@@ -203,19 +201,9 @@ export class PluginManager {
 
             this.container.unbind(tempServiceIdentifier);
 
-            // Get the initialization side from the container
-            const initializationSide = this.container.get<InitializationSide>(
-                ContainerConstants.SYSTEMS.PLUGIN.INITIALIZATIONSIDE,
-            );
-            // The context for initializing the plugin
-            const initializationContext: IInitializationContext = {
-                initializationSide,
-                container: this.container,
-            };
-
             try {
                 // Trying to call the onInit function of the plugin
-                pluginInstance.onInit(initializationContext);
+                pluginInstance.onInit();
             } catch (error) {
                 this.logger.error(`Could not call onInit for plugin "${pluginDirectory}"`, error);
 
