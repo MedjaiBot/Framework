@@ -10,8 +10,8 @@ import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
 import { IInitializationContext } from './IInitializationContext';
 import { InitializationSide } from './InitializationSide';
+import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
-import { Plugin } from './Plugin';
 
 declare var __non_webpack_require__: any;
 
@@ -33,10 +33,10 @@ export class PluginManager {
     /**
      * The plugins which will be managed by the plugin manager
      *
-     * @type {Plugin[]}
+     * @type {IPlugin[]}
      * @memberof PluginManager
      */
-    public plugins: Plugin[];
+    public plugins: IPlugin[];
 
     /**
      * The event manager which will be used
