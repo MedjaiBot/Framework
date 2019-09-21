@@ -1,3 +1,5 @@
+import { InitializationSide } from './InitializationSide';
+
 /**
  * A basic plugin definition
  *
@@ -50,8 +52,10 @@ export interface IPlugin {
      * Use this to do the initial work
      *
      * @abstract
-     * @param context The initialization context
+     * @param initializationSide The side which initializes the plugin
      * @memberof Plugin
      */
-    onInit: () => void;
+    onInit: (
+        initializationSide: InitializationSide,
+    ) => void;
 }
