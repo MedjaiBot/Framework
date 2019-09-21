@@ -1,5 +1,3 @@
-import { IInitializationContext } from './IInitializationContext';
-
 /**
  * A basic plugin definition
  *
@@ -55,5 +53,5 @@ export interface IPlugin {
      * @param context The initialization context
      * @memberof Plugin
      */
-    onInit: (context: IInitializationContext) => void;
+    onInit: () => void;
 }
