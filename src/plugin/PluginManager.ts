@@ -8,6 +8,7 @@ import { EventsConstants } from '../constants/EventConstants';
 import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
+import { InitializationSide } from './InitializationSide';
 import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 
@@ -63,6 +64,14 @@ export class PluginManager {
     private container: Container;
 
     /**
+     * The initialization side
+     *
+     * @private
+     * @memberof PluginManager
+     */
+    private initializationSide: InitializationSide;
+
+    /**
      * Creates an instance of PluginManager.
      * @param {Logger} logger The logger which should be used from the dependency injection container
      * @memberof PluginManager
@@ -76,6 +85,9 @@ export class PluginManager {
 
         @inject(ContainerConstants.DI.CONTAINER)
         container: Container,
+
+        @inject(ContainerConstants.SYSTEMS.PLUGIN.INITIALIZATIONSIDE)
+        initializationSide: InitializationSide,
     ) {
         // Sets the plugin property to an empty array
         this.plugins = [];
@@ -88,6 +100,9 @@ export class PluginManager {
 
         // Set the container
         this.container = container;
+
+        // Set the initialization side
+        this.initializationSide = initializationSide;
     }
 
     /**
@@ -204,7 +219,9 @@ export class PluginManager {
 
             try {
                 // Trying to call the onInit function of the plugin
-                pluginInstance.onInit();
+                pluginInstance.onInit(
+                    this.initializationSide,
+                );
             } catch (error) {
                 this.logger.error(`Could not call onInit for plugin "${pluginDirectory}"`, error);
 

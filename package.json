@@ -10,7 +10,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint:watch": "chokidar './src/**/*.ts' -c 'node -e \"console.clear()\" && yarn lint' --initial",
     "lint:fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
+    "lint:fix:watch": "chokidar './src/**/*.ts' -c 'node -e \"console.clear()\" && yarn lint:fix' --initial",
     "prerelease": "tsc",
     "release": "semantic-release --ci=false --debug --access public"
   },
