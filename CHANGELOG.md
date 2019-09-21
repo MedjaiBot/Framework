@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+# [1.4.0](https://github.com/MedjaiBot/Framework/compare/v1.3.4...v1.4.0) (2019-09-21)
+
+
+### Features
+
+* **pluginmanager:** call the onInit function with the InitializationSide ([e0dcac0](https://github.com/MedjaiBot/Framework/commit/e0dcac0))
+
 ## [1.3.4](https://github.com/MedjaiBot/Framework/compare/v1.3.3...v1.3.4) (2019-09-21)
 
 
