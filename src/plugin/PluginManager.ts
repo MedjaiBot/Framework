@@ -193,13 +193,15 @@ export class PluginManager {
                 continue;
             }
 
-            const tempServiceIdentifier = parsedPluginFile.id;
-            this.container.bind(tempServiceIdentifier).to(plugin.default);
+            this.container.bind(parsedPluginFile.id).to(plugin.default);
 
             // The plugin instance
-            const pluginInstance: IPlugin = this.container.get<IPlugin>(tempServiceIdentifier);
+            const pluginInstance: IPlugin = this.container.get<IPlugin>(parsedPluginFile.id);
 
-            this.container.unbind(tempServiceIdentifier);
+            pluginInstance.id = parsedPluginFile.id;
+            pluginInstance.name = parsedPluginFile.name;
+            pluginInstance.version = parsedPluginFile.version;
+            pluginInstance.author = parsedPluginFile.author;
 
             try {
                 // Trying to call the onInit function of the plugin
