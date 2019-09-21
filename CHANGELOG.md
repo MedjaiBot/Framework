@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.3.4](https://github.com/MedjaiBot/Framework/compare/v1.3.3...v1.3.4) (2019-09-21)
+
+
+### Bug Fixes
+
+* **pluginmanager:** set the base properties of the plugin when instantiated ([0d461c3](https://github.com/MedjaiBot/Framework/commit/0d461c3))
+
 ## [1.3.3](https://github.com/MedjaiBot/Framework/compare/v1.3.2...v1.3.3) (2019-09-21)
 
 
