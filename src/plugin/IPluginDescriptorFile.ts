@@ -11,6 +11,38 @@
  */
 export interface IPluginDescriptorFile {
     /**
+     * The id of the plugin
+     *
+     * @type {string}
+     * @memberof IPluginDescriptorFile
+     */
+    id: string;
+
+    /**
+     * The name of the plugin
+     *
+     * @type {string}
+     * @memberof IPluginDescriptorFile
+     */
+    name: string;
+
+    /**
+     * The version of the plugin
+     *
+     * @type {string}
+     * @memberof IPluginDescriptorFile
+     */
+    version: string;
+
+    /**
+     * The author(s) of the plugin
+     *
+     * @type {string}
+     * @memberof IPluginDescriptorFile
+     */
+    author: string;
+
+    /**
      * The main entry for the plugin
      * Can also be undefined
      *

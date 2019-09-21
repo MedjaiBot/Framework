@@ -10,10 +10,8 @@ import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
 import { IInitializationContext } from './IInitializationContext';
 import { InitializationSide } from './InitializationSide';
+import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
-import { Plugin } from './Plugin';
-
-declare var __non_webpack_require__: any;
 
 /**
  * The plugin manager manages plugins
@@ -33,10 +31,10 @@ export class PluginManager {
     /**
      * The plugins which will be managed by the plugin manager
      *
-     * @type {Plugin[]}
+     * @type {IPlugin[]}
      * @memberof PluginManager
      */
-    public plugins: Plugin[];
+    public plugins: IPlugin[];
 
     /**
      * The event manager which will be used
@@ -179,7 +177,7 @@ export class PluginManager {
 
             try {
                 // Requires the file which is defined in the "main" key
-                plugin = __non_webpack_require__(
+                plugin = require(
                     resolve(
                         directory,
                         pluginDirectory,
@@ -197,11 +195,11 @@ export class PluginManager {
                 continue;
             }
 
-            const tempServiceIdentifier = 'tempPlugin';
-            this.container.bind(tempServiceIdentifier).to(plugin.default());
+            const tempServiceIdentifier = parsedPluginFile.id;
+            this.container.bind(tempServiceIdentifier).to(plugin.default);
 
             // The plugin instance
-            const pluginInstance: Plugin = this.container.get<Plugin>(tempServiceIdentifier);
+            const pluginInstance: IPlugin = this.container.get<IPlugin>(tempServiceIdentifier);
 
             this.container.unbind(tempServiceIdentifier);
 
