@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { InitializationSide } from '../InitializationSide';
 import { PluginManager } from '../PluginManager';
 
 describe('PluginManager', () => {
@@ -16,6 +17,7 @@ describe('PluginManager', () => {
             loggerMock,
             eventManagerMock,
             containerMock,
+            InitializationSide.SERVER,
         );
     });
 
