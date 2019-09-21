@@ -13,8 +13,6 @@ import { InitializationSide } from './InitializationSide';
 import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 
-declare var __non_webpack_require__: any;
-
 /**
  * The plugin manager manages plugins
  * The standard implementation is to load plugins
@@ -179,7 +177,7 @@ export class PluginManager {
 
             try {
                 // Requires the file which is defined in the "main" key
-                plugin = __non_webpack_require__(
+                plugin = require(
                     resolve(
                         directory,
                         pluginDirectory,
