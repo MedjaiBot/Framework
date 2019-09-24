@@ -123,99 +123,61 @@ export class PluginManager {
         const pluginDirectories = readdirSync(directory);
 
         // Iterates over the contents of the directory
-        for (const index in pluginDirectories) {
-            // Gets the current entry from the contents
-            const pluginDirectory = pluginDirectories[index];
+        for (const pluginDirectory of pluginDirectories) {
             const pluginPath = resolve(
                 directory,
                 pluginDirectory,
             );
 
-            const fileStats = statSync(pluginPath);
-
             // Check if the current entry is a directory
-            if (!fileStats.isDirectory()) {
+            if (!this.checkIfIsDirectory(pluginPath)) {
                 // Current entry is not a directory so we skip it
                 continue;
             }
 
-            // Resolves the given parts into a path as string
-            const pluginJsonFile = resolve(pluginPath, 'plugin.json');
-
-            // Checks if the plugin.json file exists
-            if (!existsSync(pluginJsonFile)) {
-                this.logger.warn(
-                    `Plugin directory ${pluginDirectory} does not contain a plugin.json. Skipping plugin.`,
-                );
-
-                continue;
-            }
-
-            // The loaded plugin.json file contents
-            let pluginFileContents;
+            let parsedPluginFile: IPluginDescriptorFile;
 
             try {
-                pluginFileContents = readFileSync(pluginJsonFile).toString();
+                // Parses the the contents of plugin.json file as JSON
+                parsedPluginFile = this.getPluginDescriptorFile(pluginPath);
             } catch (error) {
-                this.logger.error('Could not read the contents of the plugin.json file', error);
+                this.logger.error('Could not parse the plugin.json', error);
 
                 continue;
             }
-
-            // Parses the the contents of plugin.json file as JSON
-            const parsedPluginFile: IPluginDescriptorFile = JSON.parse(pluginFileContents);
 
             // The main entry file of the parsed plugin file
-            const mainEntry = parsedPluginFile.main;
+            let mainEntry: string;
 
-            // Checks if the main entry is null or undefined
-            if (IsNullOrUndefined(mainEntry)) {
-                this.logger.debug(
-                    `The parsed config key "main" for the plugin ${pluginDirectory} is undefined`,
+            try {
+                mainEntry = this.getMainEntry(parsedPluginFile);
+            } catch (error) {
+                this.logger.error(
+                    `Could not get the main entry for plugin ${pluginPath}`,
+                    error,
                 );
 
                 continue;
             }
 
-            // Check if the main entry wants try to include a file outside of the plugin directory
-            if (mainEntry.includes('..')) {
-                this.logger.debug(
-                    'The main entry must be located inside in the plugin directory',
-                );
-            }
-
-            // The plugin structure of the file
+            const mainEntryPath = resolve(directory, pluginDirectory, mainEntry);
             let plugin;
 
             try {
-                // Requires the file which is defined in the "main" key
-                plugin = require(
-                    resolve(
-                        directory,
-                        pluginDirectory,
-                        mainEntry,
-                    ));
+                plugin = this.requirePlugin(mainEntryPath);
             } catch (error) {
-                this.logger.error(`Could not require plugin ${pluginDirectory}`, error);
+                this.logger.error(
+                    `Could not get the export of the plugin in the directory ${pluginPath}`,
+                    error,
+                );
 
                 continue;
             }
 
-            if (typeof plugin.default !== 'function') {
-                this.logger.warn(`The default export of the plugin ${pluginDirectory} is not a function`);
-
-                continue;
-            }
-
-            this.container.bind(parsedPluginFile.id).to(plugin.default);
-
-            // The plugin instance
-            const pluginInstance: IPlugin = this.container.get<IPlugin>(parsedPluginFile.id);
-
-            pluginInstance.id = parsedPluginFile.id;
-            pluginInstance.name = parsedPluginFile.name;
-            pluginInstance.version = parsedPluginFile.version;
-            pluginInstance.author = parsedPluginFile.author;
+            const pluginInstance = this.getPluginInstance(
+                parsedPluginFile,
+                plugin,
+            );
 
             try {
                 // Trying to call the onInit function of the plugin
@@ -231,5 +193,169 @@ export class PluginManager {
             // Add the plugin to the managed plugins
             this.plugins.push(pluginInstance);
         }
+    }
+
+    /**
+     * Checks if the given path is a directory
+     *
+     * @private
+     * @param {string} path The path to check
+     * @returns {boolean} True when the path is a directory. Otherwise false.
+     * @memberof PluginManager
+     */
+    private checkIfIsDirectory(path: string): boolean {
+        const pathStats = statSync(path);
+
+        return pathStats.isDirectory();
+    }
+
+    /**
+     * Returns the parsed plugin.json contents when the file exists.
+     *
+     * @private
+     * @param {string} pluginPath The path to the plugin
+     * @returns {IPluginDescriptorFile} The parsed plugin description file
+     * @memberof PluginManager
+     * @throws When the plugin.json file not exists
+     * @throws When the file contents could not be read
+     * @throws When the parsed content is not valid
+     */
+    private getPluginDescriptorFile(pluginPath: string): IPluginDescriptorFile {
+        const pluginDescriptorFile = resolve(
+            pluginPath,
+            'plugin.json',
+        );
+
+        if (!existsSync(pluginPath)) {
+            throw new Error(`Plugin directory ${pluginPath} does not contain a plugin.json. Skipping plugin.`);
+        }
+
+        // The loaded plugin.json file contents
+        let pluginFileContents;
+
+        try {
+            pluginFileContents = readFileSync(pluginDescriptorFile).toString();
+        } catch (error) {
+            throw new Error(`Could not read the contents of the plugin.json file: ${error}`);
+        }
+
+        // Parses the the contents of plugin.json file as JSON
+        const descriptorFile: IPluginDescriptorFile = JSON.parse(pluginFileContents);
+
+        this.validateDescriptorFile(descriptorFile);
+
+        return descriptorFile;
+    }
+
+    /**
+     * Validates an IPluginDescriptorFile
+     *
+     * @private
+     * @param {IPluginDescriptorFile} descriptorFile The descriptor file to validate
+     * @memberof PluginManager
+     * @throws When the id is not defined
+     * @throws When the name is not defined
+     * @throws When the version is not defined
+     * @throws When the author is not defined
+     * @throws When the main entry is not defined
+     */
+    private validateDescriptorFile(descriptorFile: IPluginDescriptorFile) {
+        if (IsNullOrUndefined(descriptorFile.id)) {
+            throw new Error('The id is not defined');
+        }
+
+        if (IsNullOrUndefined(descriptorFile.name)) {
+            throw new Error('The name is not defined');
+        }
+
+        if (IsNullOrUndefined(descriptorFile.version)) {
+            throw new Error('The version is not defined');
+        }
+
+        if (IsNullOrUndefined(descriptorFile.author)) {
+            throw new Error('The author is not defined');
+        }
+
+        if (IsNullOrUndefined(descriptorFile.main)) {
+            throw new Error('The main entry is not defined');
+        }
+    }
+
+    /**
+     * Returns the main entry for the plugin
+     *
+     * @param pluginDescription The instance of the IPluginDescriptorFile
+     */
+    private getMainEntry(pluginDescription: IPluginDescriptorFile): string {
+        const mainEntry = pluginDescription.main;
+
+        // Check if the main entry wants try to include a file outside of the plugin directory
+        if (mainEntry.includes('..')) {
+            throw new Error(
+                'The main entry must be located inside in the plugin directory',
+            );
+        }
+
+        return mainEntry;
+    }
+
+    /**
+     * Loads the main entry point of a plugin
+     * and returns the export of the file
+     *
+     * @private
+     * @param {string} mainEntryPath The main entry path to the plugin file
+     * @returns {() => IPlugin} The loaded instance of the plugin
+     * @memberof PluginManager
+     */
+    private requirePlugin(mainEntryPath: string): any {
+        // The plugin structure of the file
+        let pluginFunction;
+
+        try {
+            // Requires the file which is defined in the "main" key
+            pluginFunction = require(mainEntryPath);
+        } catch (error) {
+            throw error;
+        }
+
+        // Check if the default export is a function
+        if (typeof pluginFunction.default !== 'function') {
+            throw new Error('The default export is not a function');
+        }
+
+        return pluginFunction;
+    }
+
+    /**
+     * Returns an plugin instance which was created with
+     * the help of the dependency injection container
+     *
+     * @private
+     * @param {IPluginDescriptorFile} parsedPluginFile The plugin descriptor file
+     * @param {*} plugin The loaded main entry file of the plugin
+     * @returns {IPlugin} The created plugin instance
+     * @memberof PluginManager
+     */
+    private getPluginInstance(
+        parsedPluginFile: IPluginDescriptorFile,
+        plugin: any,
+    ): IPlugin {
+        const pluginId = parsedPluginFile.id;
+
+        // Binds the plugin to the dependency injection container
+        this.container.bind(pluginId).to(plugin.default);
+
+        // The plugin instance
+        const pluginInstance: IPlugin = this.container.get<IPlugin>(
+            pluginId,
+        );
+
+        pluginInstance.id = pluginId;
+        pluginInstance.name = parsedPluginFile.name;
+        pluginInstance.version = parsedPluginFile.version;
+        pluginInstance.author = parsedPluginFile.author;
+
+        return pluginInstance;
     }
 }
