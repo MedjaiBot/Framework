@@ -1,29 +1,31 @@
 import { Container } from 'inversify';
 import { ContainerConstants } from '../constants/ContainerConstants';
 import { InitializationSide } from '../plugin/InitializationSide';
-import { ClientModule } from './ClientModule';
-import { EventModule } from './EventModule';
-import { LoggerModule } from './LoggerModule';
-import { PluginModule } from './PluginModule';
-import { ServerModule } from './ServerModule';
+import { ClientModule } from './modules/ClientModule';
+import { EventModule } from './modules/EventModule';
+import { LoggerModule } from './modules/LoggerModule';
+import { PluginModule } from './modules/PluginModule';
+import { ServerModule } from './modules/ServerModule';
 
-const container = new Container();
+export const applicationContainer = new Container();
 
 export const GetPreconfiguredContainer = (
     initializationSide: InitializationSide,
-) => {
-    container.load(new LoggerModule());
-    container.load(new EventModule());
-    container.load(new PluginModule());
-
-    container.bind(ContainerConstants.DI.CONTAINER).toConstantValue(container);
+): Container => {
+    applicationContainer.load(new LoggerModule());
+    applicationContainer.load(new EventModule());
+    applicationContainer.load(new PluginModule());
 
     switch (initializationSide) {
         case InitializationSide.SERVER:
-            container.load(new ServerModule());
+            applicationContainer.load(new ServerModule());
             break;
         case InitializationSide.CLIENT:
-            container.load(new ClientModule());
+            applicationContainer.load(new ClientModule());
             break;
     }
+
+    applicationContainer.bind(ContainerConstants.DI.CONTAINER).toConstantValue(applicationContainer);
+
+    return applicationContainer;
 };

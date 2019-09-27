@@ -1,6 +1,6 @@
 import { ContainerModule } from 'inversify';
-import { ContainerConstants } from '../constants/ContainerConstants';
-import { PluginManager } from '../plugin/PluginManager';
+import { ContainerConstants } from '../../constants/ContainerConstants';
+import { PluginManager } from '../../plugin/PluginManager';
 
 export class PluginModule extends ContainerModule {
     constructor() {

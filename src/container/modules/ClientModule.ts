@@ -1,7 +1,7 @@
 import { ContainerModule } from 'inversify';
-import { ContainerConstants } from '../constants/ContainerConstants';
-import { WebLogger } from '../logger/WebLogger';
-import { InitializationSide } from '../plugin/InitializationSide';
+import { ContainerConstants } from '../../constants/ContainerConstants';
+import { WebLogger } from '../../logger/WebLogger';
+import { InitializationSide } from '../../plugin/InitializationSide';
 
 export class ClientModule extends ContainerModule {
     constructor() {
