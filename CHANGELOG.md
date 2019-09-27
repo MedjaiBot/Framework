@@ -1,5 +1,17 @@
 # MedjaiBot Framework changelog
 
+# [1.6.0](https://github.com/MedjaiBot/Framework/compare/v1.5.0...v1.6.0) (2019-09-27)
+
+
+### Bug Fixes
+
+* **container:** fixed the return type of GetPreconfiguredContainer ([9e7694d](https://github.com/MedjaiBot/Framework/commit/9e7694d))
+
+
+### Features
+
+* **event:** added the Cancelable event ([ece2185](https://github.com/MedjaiBot/Framework/commit/ece2185))
+
 # [1.5.0](https://github.com/MedjaiBot/Framework/compare/v1.4.1...v1.5.0) (2019-09-27)
 
 
