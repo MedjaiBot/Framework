@@ -9,7 +9,12 @@ export class ServerModule extends ContainerModule {
         super((bind) => {
             bind(ContainerConstants.SYSTEMS.PLUGIN.INITIALIZATIONSIDE)
                 .toConstantValue(InitializationSide.SERVER);
+
+            bind(ContainerConstants.LOGGING.STREAMS.OUT).toConstantValue(process.stdout);
+            bind(ContainerConstants.LOGGING.STREAMS.ERROR).toConstantValue(process.stderr);
+
             bind(ContainerConstants.LOGGING.FORMATTER.LOGLEVEL).to(TTYLogLevelFormatter);
+
             bind(ContainerConstants.LOGGING.LOGGER).to(TTYLogger).onActivation((context) => {
                 const logger = new TTYLogger(
                     context.container.get(ContainerConstants.LOGGING.STREAMS.OUT),
