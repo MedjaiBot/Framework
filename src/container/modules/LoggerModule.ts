@@ -10,5 +10,4 @@ export class LoggerModule extends ContainerModule {
             bind(ContainerConstants.LOGGING.FORMATTER.DATETIME).to(DateTimeFormatter);
         });
     }
-
 }
