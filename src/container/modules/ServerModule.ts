@@ -1,5 +1,6 @@
 import { ContainerModule } from 'inversify';
 import { ContainerConstants } from '../../constants/ContainerConstants';
+import { TTYLogLevelFormatter } from '../../logger/formatter/TTYLogLevelFormatter';
 import { TTYLogger } from '../../logger/TTYLogger';
 import { InitializationSide } from '../../plugin/InitializationSide';
 
@@ -8,6 +9,7 @@ export class ServerModule extends ContainerModule {
         super((bind) => {
             bind(ContainerConstants.SYSTEMS.PLUGIN.INITIALIZATIONSIDE)
                 .toConstantValue(InitializationSide.SERVER);
+            bind(ContainerConstants.LOGGING.FORMATTER.LOGLEVEL).to(TTYLogLevelFormatter);
             bind(ContainerConstants.LOGGING.LOGGER).to(TTYLogger).onActivation((context) => {
                 const logger = new TTYLogger(
                     context.container.get(ContainerConstants.LOGGING.STREAMS.OUT),
