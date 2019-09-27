@@ -1,5 +1,13 @@
 # MedjaiBot Framework changelog
 
+# [1.5.0](https://github.com/MedjaiBot/Framework/compare/v1.4.1...v1.5.0) (2019-09-27)
+
+
+### Features
+
+* **container:** added pre configurable containers and container modules ([071a008](https://github.com/MedjaiBot/Framework/commit/071a008))
+* **logger:** added the WebLogger ([e56781a](https://github.com/MedjaiBot/Framework/commit/e56781a))
+
 ## [1.4.1](https://github.com/MedjaiBot/Framework/compare/v1.4.0...v1.4.1) (2019-09-24)
 
 
