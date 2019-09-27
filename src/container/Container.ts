@@ -11,7 +11,7 @@ const container = new Container();
 
 export const GetPreconfiguredContainer = (
     initializationSide: InitializationSide,
-) => {
+): Container => {
     container.load(new LoggerModule());
     container.load(new EventModule());
     container.load(new PluginModule());
@@ -26,4 +26,6 @@ export const GetPreconfiguredContainer = (
             container.load(new ClientModule());
             break;
     }
+
+    return container;
 };
