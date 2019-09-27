@@ -1,7 +1,7 @@
 import { ContainerModule } from 'inversify';
-import { ContainerConstants } from '../constants/ContainerConstants';
-import { DateTimeFormatter } from '../logger/formatter/DateTimeFormatter';
-import { LogLevel } from '../logger/LogLevel';
+import { ContainerConstants } from '../../constants/ContainerConstants';
+import { DateTimeFormatter } from '../../logger/formatter/DateTimeFormatter';
+import { LogLevel } from '../../logger/LogLevel';
 
 export class LoggerModule extends ContainerModule {
     constructor() {

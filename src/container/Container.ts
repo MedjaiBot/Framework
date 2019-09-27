@@ -1,11 +1,11 @@
 import { Container } from 'inversify';
 import { ContainerConstants } from '../constants/ContainerConstants';
 import { InitializationSide } from '../plugin/InitializationSide';
-import { ClientModule } from './ClientModule';
-import { EventModule } from './EventModule';
-import { LoggerModule } from './LoggerModule';
-import { PluginModule } from './PluginModule';
-import { ServerModule } from './ServerModule';
+import { ClientModule } from './modules/ClientModule';
+import { EventModule } from './modules/EventModule';
+import { LoggerModule } from './modules/LoggerModule';
+import { PluginModule } from './modules/PluginModule';
+import { ServerModule } from './modules/ServerModule';
 
 const container = new Container();
 

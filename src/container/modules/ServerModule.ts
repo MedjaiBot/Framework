@@ -1,7 +1,7 @@
 import { ContainerModule } from 'inversify';
-import { ContainerConstants } from '../constants/ContainerConstants';
-import { TTYLogger } from '../logger/TTYLogger';
-import { InitializationSide } from '../plugin/InitializationSide';
+import { ContainerConstants } from '../../constants/ContainerConstants';
+import { TTYLogger } from '../../logger/TTYLogger';
+import { InitializationSide } from '../../plugin/InitializationSide';
 
 export class ServerModule extends ContainerModule {
     constructor() {
