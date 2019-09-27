@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.6.1](https://github.com/MedjaiBot/Framework/compare/v1.6.0...v1.6.1) (2019-09-27)
+
+
+### Bug Fixes
+
+* **servermodule:** bound the output streams for the TTYLogger ([31006e4](https://github.com/MedjaiBot/Framework/commit/31006e4))
+
 # [1.6.0](https://github.com/MedjaiBot/Framework/compare/v1.5.0...v1.6.0) (2019-09-27)
 
 
