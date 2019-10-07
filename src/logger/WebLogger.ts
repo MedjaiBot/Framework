@@ -116,7 +116,7 @@ export class WebLogger extends Logger {
                 styles.push('color: red');
                 break;
             case LogLevel.WARN:
-                prefix.push('INFO');
+                prefix.push('WARN');
                 styles.push('color: #8fa6f7');
                 break;
             case LogLevel.INFO:
@@ -124,7 +124,7 @@ export class WebLogger extends Logger {
                 styles.push('color: blue');
                 break;
             case LogLevel.DEBUG:
-                prefix.push('INFO');
+                prefix.push('DEBUG');
                 styles.push('color: cyan');
                 break;
         }
