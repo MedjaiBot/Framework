@@ -21,7 +21,7 @@ export class DateTimeFormatter extends Formatter {
     public format(timestamp: Date): string {
         const formattedDate = [
             this.formatNumber(timestamp.getDate()),
-            this.formatNumber(timestamp.getMonth()),
+            this.formatNumber(timestamp.getMonth() + 1),
             timestamp.getFullYear(),
         ].join('.');
 
