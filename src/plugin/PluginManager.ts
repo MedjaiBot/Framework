@@ -125,7 +125,7 @@ export class PluginManager {
      * @param directory The directory where to load the plugins from
      * @memberof PluginManager
      */
-    public loadPlugins = (directory: string) => {
+    public preparePlugins = (directory: string) => {
         this.eventManager.broadcast(EventsConstants.Plugin.LoadPlugins);
 
         // Checks if the given directory exists on the filesystem
@@ -221,7 +221,9 @@ export class PluginManager {
                 );
             }
         }
+    }
 
+    public async loadPlugins() {
         this.notedPlugins.forEach((notedPlugin) => {
             const pluginInstance = this.getPluginInstance(
                 notedPlugin.pluginDescription,
