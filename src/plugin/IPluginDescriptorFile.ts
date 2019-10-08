@@ -50,4 +50,13 @@ export interface IPluginDescriptorFile {
      * @memberof IPluginDescriptorFile
      */
     main: string;
+
+    /**
+     * Contains the path to additional container
+     * bindings for the plugin
+     *
+     * @type {string}
+     * @memberof IPluginDescriptorFile
+     */
+    containerBindings?: string;
 }
