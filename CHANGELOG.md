@@ -1,5 +1,19 @@
 # MedjaiBot Framework changelog
 
+# [2.0.0](https://github.com/MedjaiBot/Framework/compare/v1.7.1...v2.0.0) (2019-10-08)
+
+
+### Features
+
+* **containerconstants:** added the entity constant to the container constants ([354c8bc](https://github.com/MedjaiBot/Framework/commit/354c8bc))
+* **pluginmanager:** splitted the loading process ([f8ec5b5](https://github.com/MedjaiBot/Framework/commit/f8ec5b5))
+
+
+### BREAKING CHANGES
+
+* **pluginmanager:** Changed the parameters of the loadPlugins function. Splitted up the loading process
+of the container bindings and the plugins
+
 ## [1.7.1](https://github.com/MedjaiBot/Framework/compare/v1.7.0...v1.7.1) (2019-10-08)
 
 
