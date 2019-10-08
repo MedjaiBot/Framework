@@ -1,4 +1,12 @@
 export const ContainerConstants = {
+    DATABASE: {
+        ENTITY: Symbol.for('System.Database.Entity'),
+    },
+
+    DI: {
+        CONTAINER: Symbol.for('System.Container'),
+    },
+
     LOGGING: {
         FORMATTER: {
             DATETIME: Symbol.for('System.Logging.Formatter.DateTime'),
@@ -10,10 +18,6 @@ export const ContainerConstants = {
             OUT: Symbol.for('System.Logging.Streams.Out'),
             ERROR: Symbol.for('System.Logging.Streams.Error'),
         },
-    },
-
-    DI: {
-        CONTAINER: Symbol.for('System.Container'),
     },
 
     SYSTEMS: {
