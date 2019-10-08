@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [1.7.1](https://github.com/MedjaiBot/Framework/compare/v1.7.0...v1.7.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **pluginmanager:** fixed the loading process of the container bindings ([282318b](https://github.com/MedjaiBot/Framework/commit/282318b))
+
 # [1.7.0](https://github.com/MedjaiBot/Framework/compare/v1.6.1...v1.7.0) (2019-10-08)
 
 
