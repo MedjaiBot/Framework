@@ -10,6 +10,7 @@ import { injectable } from 'inversify';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/Server
  */
+
 @injectable()
 export abstract class Formatter {
     /**

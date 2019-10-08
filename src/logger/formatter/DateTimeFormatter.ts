@@ -10,8 +10,8 @@ import { Formatter } from './Formatter';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/Server
  */
-@injectable()
 
+@injectable()
 export class DateTimeFormatter extends Formatter {
     /**
      * Formats the given date to a pretty string

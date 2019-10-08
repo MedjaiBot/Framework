@@ -13,6 +13,7 @@ import { Formatter } from './Formatter';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/Server
  */
+
 @injectable()
 export class TTYLogLevelFormatter extends Formatter {
     /**
