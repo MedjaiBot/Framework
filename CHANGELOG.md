@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [2.0.1](https://github.com/MedjaiBot/Framework/compare/v2.0.0...v2.0.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **datetimeformatter:** fixed the month display ([1df509c](https://github.com/MedjaiBot/Framework/commit/1df509c))
+
 # [2.0.0](https://github.com/MedjaiBot/Framework/compare/v1.7.1...v2.0.0) (2019-10-08)
 
 
