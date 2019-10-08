@@ -1,5 +1,17 @@
 # MedjaiBot Framework changelog
 
+# [1.7.0](https://github.com/MedjaiBot/Framework/compare/v1.6.1...v1.7.0) (2019-10-08)
+
+
+### Bug Fixes
+
+* **logger:** fixed log levels in the WebLogger ([9c0ac0d](https://github.com/MedjaiBot/Framework/commit/9c0ac0d))
+
+
+### Features
+
+* **pluginmanager:** load container bindings before initializing the plugins ([a65eca7](https://github.com/MedjaiBot/Framework/commit/a65eca7))
+
 ## [1.6.1](https://github.com/MedjaiBot/Framework/compare/v1.6.0...v1.6.1) (2019-09-27)
 
 
