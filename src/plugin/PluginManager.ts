@@ -9,6 +9,7 @@ import { EventManager } from '../event/EventManager';
 import { IsNullOrUndefined } from '../Extras';
 import { Logger } from '../logger/Logger';
 import { InitializationSide } from './InitializationSide';
+import { INotedPlugin } from './INotedPlugin';
 import { IPlugin } from './IPlugin';
 import { IPluginDescriptorFile } from './IPluginDescriptorFile';
 
@@ -72,6 +73,17 @@ export class PluginManager {
     private initializationSide: InitializationSide;
 
     /**
+     * Contains all noted plugins which should
+     * be loaded after the container binding files
+     * were bound
+     *
+     * @private
+     * @type {INotedPlugin[]}
+     * @memberof PluginManager
+     */
+    private notedPlugins: INotedPlugin[];
+
+    /**
      * Creates an instance of PluginManager.
      * @param {Logger} logger The logger which should be used from the dependency injection container
      * @memberof PluginManager
@@ -103,6 +115,8 @@ export class PluginManager {
 
         // Set the initialization side
         this.initializationSide = initializationSide;
+
+        this.notedPlugins = [];
     }
 
     /**
@@ -174,9 +188,44 @@ export class PluginManager {
                 continue;
             }
 
+            if (parsedPluginFile.containerBindings === undefined) {
+                continue;
+            }
+
+            if (parsedPluginFile.containerBindings.trim().length === 0) {
+                this.logger.info(`The path to the container bindings for the plugin ${parsedPluginFile.name} is empty`);
+
+                continue;
+            }
+
+            if (parsedPluginFile.containerBindings.includes('..')) {
+                this.logger.warn(`The container bindings for the plugin ${parsedPluginFile.name} are not inside the plugin directory`);
+
+                continue;
+            }
+
+            try {
+                this.loadContainerBindings(
+                    pluginDirectory,
+                    parsedPluginFile.containerBindings,
+                );
+
+                this.notedPlugins.push({
+                    plugin,
+                    pluginDescription: parsedPluginFile,
+                });
+            } catch (error) {
+                this.logger.error(
+                    `Could not load the container bindings for the plugin ${parsedPluginFile.name}`,
+                    error,
+                );
+            }
+        }
+
+        this.notedPlugins.forEach((notedPlugin) => {
             const pluginInstance = this.getPluginInstance(
-                parsedPluginFile,
-                plugin,
+                notedPlugin.pluginDescription,
+                notedPlugin.plugin,
             );
 
             try {
@@ -185,14 +234,17 @@ export class PluginManager {
                     this.initializationSide,
                 );
             } catch (error) {
-                this.logger.error(`Could not call onInit for plugin "${pluginDirectory}"`, error);
+                this.logger.error(
+                    `Could not call onInit for plugin "${notedPlugin.pluginDescription.name}"`,
+                    error,
+                );
 
-                continue;
+                return;
             }
 
             // Add the plugin to the managed plugins
             this.plugins.push(pluginInstance);
-        }
+        });
     }
 
     /**
@@ -325,6 +377,30 @@ export class PluginManager {
         }
 
         return pluginFunction;
+    }
+
+    /**
+     * Loads the container bindings for the given plugin
+     *
+     * @private
+     * @param {string} pluginDirectory The path to the plugin directory
+     * @param {IPluginDescriptorFile} parsedPluginFile The parsed plugin description file
+     * @memberof PluginManager
+     */
+    private loadContainerBindings(
+        pluginDirectory: string,
+        containerBindingsPath: string,
+    ) {
+        const resolvedContainerBindingsPath = resolve(
+            pluginDirectory,
+            containerBindingsPath,
+        );
+
+        const loadedContainerBindings = require(
+            resolvedContainerBindingsPath,
+        );
+
+        loadedContainerBindings(this.container);
     }
 
     /**
