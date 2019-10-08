@@ -10,8 +10,8 @@ import { Formatter } from './Formatter';
  * @license MIT
  * @copyright MedjaiBot https://github.com/MedjaiBot/Server
  */
-@injectable()
 
+@injectable()
 export class DateTimeFormatter extends Formatter {
     /**
      * Formats the given date to a pretty string
@@ -21,7 +21,7 @@ export class DateTimeFormatter extends Formatter {
     public format(timestamp: Date): string {
         const formattedDate = [
             this.formatNumber(timestamp.getDate()),
-            this.formatNumber(timestamp.getMonth()),
+            this.formatNumber(timestamp.getMonth() + 1),
             timestamp.getFullYear(),
         ].join('.');
 
