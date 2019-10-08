@@ -206,7 +206,7 @@ export class PluginManager {
 
             try {
                 this.loadContainerBindings(
-                    pluginDirectory,
+                    pluginPath,
                     parsedPluginFile.containerBindings,
                 );
 
@@ -387,7 +387,7 @@ export class PluginManager {
      * @param {IPluginDescriptorFile} parsedPluginFile The parsed plugin description file
      * @memberof PluginManager
      */
-    private loadContainerBindings(
+    private async loadContainerBindings(
         pluginDirectory: string,
         containerBindingsPath: string,
     ) {
@@ -400,7 +400,7 @@ export class PluginManager {
             resolvedContainerBindingsPath,
         );
 
-        loadedContainerBindings(this.container);
+        await this.container.loadAsync(new loadedContainerBindings.default());
     }
 
     /**
