@@ -1,5 +1,12 @@
 # MedjaiBot Framework changelog
 
+## [2.0.2](https://github.com/MedjaiBot/Framework/compare/v2.0.1...v2.0.2) (2019-10-19)
+
+
+### Bug Fixes
+
+* **eventmodule:** bind the event manager in singleton scope ([556dad4](https://github.com/MedjaiBot/Framework/commit/556dad4))
+
 ## [2.0.1](https://github.com/MedjaiBot/Framework/compare/v2.0.0...v2.0.1) (2019-10-08)
 
 
